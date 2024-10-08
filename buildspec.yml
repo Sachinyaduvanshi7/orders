@@ -12,6 +12,8 @@ phases:
       - source ~/.bashrc
       - echo 'Check kubectl version'
       - kubectl version --short --client
+      - echo Logging in to Docker Hub...
+      - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD # Add Docker Hub login
 
   pre_build:
     commands:
@@ -38,4 +40,4 @@ phases:
       - kubectl get nodes
       - kubectl apply -f eks_cicd/deployment.yml
       - kubectl apply -f eks_cicd/service.yml
-      - kubectl rollout restart deployment/orders-deployment # Restart your deployment
+      - kubectl rollout restart deployment/api-gateway-deployment # Restart your deployment
